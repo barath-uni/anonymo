@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "619107288351",
+    "firebase_url": "https://anonymo-985ec.firebaseio.com",
+    "project_id": "anonymo-985ec",
+    "storage_bucket": "anonymo-985ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619107288351:android:184a75ffece8f4c5359c2a",
+        "android_client_info": {
+          "package_name": "anonymo.androidmonks.com.example.anonymo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619107288351-ggr1r1tqdj81ivirg4lq1ot58lnlin1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA29RQF34ctQwu9X0gA9RdXrvany98lKrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619107288351-ggr1r1tqdj81ivirg4lq1ot58lnlin1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,8 @@
 import 'package:anonymo/listdata.dart';
-import 'package:anonymo/userinput.dart';
+import 'package:anonymo/userSend.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 void main() => runApp(
 
@@ -20,9 +21,11 @@ class HomeApp extends StatefulWidget {
 class _HomeAppState extends State<HomeApp> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
-    UserInput(),
+    UserSend(),
     ListData()
   ];
+
+  String username = "Androidmonks";
 
   void _onItemTapped(int index) {
     setState(() {
@@ -44,7 +47,7 @@ class _HomeAppState extends State<HomeApp> {
           onTap: _onItemTapped,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.perm_media),
+              icon: Icon(Icons.perm_media),
               title: Text("Messages")
 
             ),
