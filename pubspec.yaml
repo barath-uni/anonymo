@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   firebase_core: 0.2.5+1
   firebase_database: 1.0.5
+  intro_slider: ^2.2.8
+  sqflite:
 
 dev_dependencies:
   flutter_test:

@@ -16,8 +16,8 @@ class _UserSendState extends State<UserSend> {
         future: _fireBaseUtils.getMessage(Username),
         builder: (context, snapshot){
           if (!snapshot.hasData)
-            { print("Inside no data");
-              return CircularProgressIndicator();
+            {
+              return Center(child: CircularProgressIndicator());
             }
           return ListView.builder(
             itemCount: snapshot.data.length,

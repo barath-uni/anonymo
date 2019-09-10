@@ -5,6 +5,7 @@ INJECTED from /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/android/app/s
 INJECTED from /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/android/app/src/main/AndroidManifest.xml:1:1-33:12
 INJECTED from /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/android/app/src/main/AndroidManifest.xml:1:1-33:12
 MERGED from /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/android/app/src/main/AndroidManifest.xml:1:1-33:12
+MERGED from [:sqflite] /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/sqflite/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_database] /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/firebase_database/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_core] /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/firebase_core/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-database:16.0.3] /home/baradwaj/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.3.aar/f199f670d049011963ced3db149e1539/AndroidManifest.xml:15:1-25:12
@@ -133,6 +134,8 @@ uses-sdk
 INJECTED from /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/android/app/src/main/AndroidManifest.xml
+MERGED from [:sqflite] /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/sqflite/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/sqflite/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_database] /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/firebase_database/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_database] /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/firebase_database/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] /home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/firebase_core/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
