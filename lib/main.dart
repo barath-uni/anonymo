@@ -6,6 +6,7 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 
 import 'UserIdDB.dart';
+import 'firebasedatabase.dart';
 
 void main() => runApp(
     MaterialApp(
@@ -22,9 +23,11 @@ class HomeApp extends StatefulWidget {
 
 class _HomeAppState extends State<HomeApp> {
 
-  UserIdDb userIdDb = new UserIdDb();
+  UserIdDb userIdDb = UserIdDb();
 
   List<Slide> slides = new List();
+
+  FireBaseUtils _fireBaseUtils = new FireBaseUtils();
 
   TextEditingController _colorController = new TextEditingController();
 
@@ -114,13 +117,14 @@ class _HomeAppState extends State<HomeApp> {
 
   @override
   Widget build(BuildContext context) {
-    userIdDb.initialise();
     return Scaffold(
       body: Builder(
         builder: (context){
           return FutureBuilder(
             future: userIdDb.retrieveUserId(),
             builder: (context, snapshot) {
+              print("Snapshot");
+              print(snapshot);
               if(snapshot.connectionState == ConnectionState.done)
                 {
                   print("Inside connection state done");
@@ -145,13 +149,25 @@ class _HomeAppState extends State<HomeApp> {
                                     "Are you sure about:" + _idController.text),
                                 action: SnackBarAction(
                                   label: "Sure",
-                                  onPressed: () {
-                                    userIdDb.insertUserId(_idController.text);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomeWidget()),
-                                    );
+                                  onPressed: () async{
+                                    bool firebaseResult = await _fireBaseUtils.validateUsername(_idController.text);
+                                    print("Response");
+                                    print(firebaseResult);
+                                    if(firebaseResult)
+                                      {
+                                        _fireBaseUtils.writeMessage(_idController.text, "welcome");
+                                        userIdDb.insertUserId(_idController.text);
+                                        Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomeWidget()),
+                                      );
+                                    }
+                                    else
+                                      {
+                                        Scaffold.of(context).showSnackBar(new SnackBar(
+                                            content: Text("This ID is already taken. Try another")));
+                                      }
                                   },
                                 ),
                               )
