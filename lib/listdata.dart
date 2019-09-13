@@ -22,11 +22,19 @@ class _ListDataState extends State<ListData> {
             Container(
               child: TextField(
           cursorColor: Colors.black,
-          cursorWidth: 10.0,
+          cursorWidth: 2.0,
           decoration: InputDecoration(
-              icon: Icon(Icons.supervised_user_circle),
-              fillColor: Colors.white70
+          labelText: "Enter UserId",
+          fillColor: Colors.white,
+          icon: Icon(Icons.supervised_user_circle),
+          border: new OutlineInputBorder(
+            borderRadius: new BorderRadius.circular(20.0),
+            borderSide: new BorderSide(
+            ),
           ),
+          //fillColor: Colors.green
+        ),
+        style: TextStyle(fontFamily: "Poppins", color: Color(0xff4baea0), fontSize: 12.0),
           controller: _userController,
         ),
         color: Colors.white,
@@ -35,22 +43,33 @@ class _ListDataState extends State<ListData> {
             Container(
               child:TextField(
                 cursorColor: Colors.black,
-                cursorWidth: 10.0,
+                cursorWidth: 2.0,
                 decoration: InputDecoration(
-                    icon: Icon(Icons.message),
-                    fillColor: Colors.white70
+                  labelText: "Enter Message",
+                  icon: Icon(Icons.message),
+                  fillColor: Colors.white,
+                  border: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(20.0),
+                    borderSide: new BorderSide(
+                    ),
+                  ),
+                  //fillColor: Colors.green
                 ),
+                style: TextStyle(fontFamily: "Poppins", color: Color(0xff4baea0), fontSize: 12.0),
                 controller: _controller,
               ),
               color: Colors.white,
             ),
             Spacer(),
             FlatButton(
-              color: Colors.white,
-              child: Text("Send Feedback"),
+              color: Color(0xff4baea0),
+              child: Text("Send Feedback",
+                style: TextStyle(fontFamily: "Poppins",
+                    color: Colors.white, fontSize: 14.0),),
               onPressed: (){
                 _fireBaseUtils.writeMessage(_userController.text, _controller.text);
               },
+
             ),
             Spacer(flex: 2,)
           ],

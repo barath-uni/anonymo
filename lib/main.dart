@@ -6,6 +6,7 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 
 import 'UserIdDB.dart';
+import 'firebasedatabase.dart';
 
 void main() => runApp(
     MaterialApp(
@@ -22,9 +23,11 @@ class HomeApp extends StatefulWidget {
 
 class _HomeAppState extends State<HomeApp> {
 
-  UserIdDb userIdDb = new UserIdDb();
+  UserIdDb userIdDb = UserIdDb();
 
   List<Slide> slides = new List();
+
+  FireBaseUtils _fireBaseUtils = new FireBaseUtils();
 
   TextEditingController _colorController = new TextEditingController();
 
@@ -55,55 +58,109 @@ class _HomeAppState extends State<HomeApp> {
 
     slides.add(
       new Slide(
-        title: "FAVORITE COLOR",
-        description: "We will try to form something super interesting with your Favorite Color",
+        title: "Favourite Color!",
+        description: "We will try to form your avatar with your Favorite Color",
         centerWidget: TextField(
           controller: _colorController,
+          decoration: InputDecoration(
+            labelText: "Enter Color",
+            fillColor: Colors.white,
+            border: new OutlineInputBorder(
+              borderRadius: new BorderRadius.circular(20.0),
+              borderSide: new BorderSide(
+              color: Colors.white
+              ),
+            ),
+            //fillColor: Colors.green
+          ),
           onEditingComplete: (){
             formRandomName(_colorController.text);
+
           },
-
         ),
-
-        backgroundColor: Color(0xfff5a623),
+        styleTitle: TextStyle(fontFamily: "Poppins", color: Colors.white),
+        styleDescription: TextStyle(fontFamily: "Poppins"),
+        backgroundColor: Color(0xfff88379),
       ),
     );
     slides.add(
       new Slide(
-        title: "COUNTRY",
-        description: "We Will Form Something with your favorite country",
+        title: "Country?",
+        description: "Do not worry. No location tracking.Promise!",
         centerWidget: TextField(
           controller: _countryController,
+            decoration: InputDecoration(
+              labelText: "Enter Country",
+              fillColor: Colors.white,
+              border: new OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(20.0),
+                borderSide: new BorderSide(
+                    color: Colors.white
+                ),
+              ),
+              //fillColor: Colors.green
+            ),
           onEditingComplete: (){
             formRandomName(_countryController.text);
           },
+          style: TextStyle(fontFamily: "Poppins"),
         ),
-        backgroundColor: Color(0xff203152),
+        styleTitle: TextStyle(fontFamily: "Poppins", color:Colors.white),
+        styleDescription: TextStyle(fontFamily: "Poppins"),
+        backgroundColor: Color(0xff4baea0),
       ),
     );
     slides.add(
       new Slide(
-        title: "YOUR NAME",
+        title: "Name?",
         description:
-        "Don't Worry We Wont Let Anyone know your Identity!",
+        "No one will know your name! But its easy to recognise.",
         centerWidget: TextField(
           controller: _nameController,
+            decoration: InputDecoration(
+              labelText: "Enter Color",
+              fillColor: Colors.white,
+              border: new OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(20.0),
+                borderSide: new BorderSide(
+                    color: Colors.white
+                ),
+              ),
+              //fillColor: Colors.green
+            ),
           onEditingComplete: (){
             formRandomName(_nameController.text);
           },
         ),
-        backgroundColor: Color(0xff9932CC),
+        styleTitle: TextStyle(fontFamily: "Poppins", color:Colors.white),
+        styleDescription: TextStyle(fontFamily: "Poppins"),
+        backgroundColor: Color(0xfff889c9),
+
       ),
     );
     slides.add(
       new Slide(
         title:"YOUR ID",
         description: "This is your ID! Should you choose to accept it!",
-        centerWidget: TextField(
-          controller: _idController,
-          onChanged: (String userId){
-          },
-        ),
+          centerWidget: TextField(
+            controller: _idController,
+            decoration: InputDecoration(
+              labelText: "Enter UserId",
+              fillColor: Colors.white,
+              border: new OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(20.0),
+                borderSide: new BorderSide(
+                    color: Colors.white
+                ),
+              ),
+              //fillColor: Colors.green
+            ),
+            onEditingComplete: (){
+              formRandomName(_idController.text);
+            },
+          ),
+          styleTitle: TextStyle(fontFamily: "Poppins", color:Colors.white),
+          styleDescription: TextStyle(fontFamily: "Poppins"),
         backgroundColor: Color(0xff203152)
 
       )
@@ -114,13 +171,14 @@ class _HomeAppState extends State<HomeApp> {
 
   @override
   Widget build(BuildContext context) {
-    userIdDb.initialise();
     return Scaffold(
       body: Builder(
         builder: (context){
           return FutureBuilder(
             future: userIdDb.retrieveUserId(),
             builder: (context, snapshot) {
+              print("Snapshot");
+              print(snapshot);
               if(snapshot.connectionState == ConnectionState.done)
                 {
                   print("Inside connection state done");
@@ -145,13 +203,25 @@ class _HomeAppState extends State<HomeApp> {
                                     "Are you sure about:" + _idController.text),
                                 action: SnackBarAction(
                                   label: "Sure",
-                                  onPressed: () {
-                                    userIdDb.insertUserId(_idController.text);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomeWidget()),
-                                    );
+                                  onPressed: () async{
+                                    bool firebaseResult = await _fireBaseUtils.validateUsername(_idController.text);
+                                    print("Response");
+                                    print(firebaseResult);
+                                    if(firebaseResult)
+                                      {
+                                        _fireBaseUtils.writeMessage(_idController.text, "welcome");
+                                        userIdDb.insertUserId(_idController.text);
+                                        Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomeWidget()),
+                                      );
+                                    }
+                                    else
+                                      {
+                                        Scaffold.of(context).showSnackBar(new SnackBar(
+                                            content: Text("This ID is already taken. Try another")));
+                                      }
                                   },
                                 ),
                               )
@@ -198,8 +268,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff4baea0),
-      appBar: AppBar(title: Text("Anonymo", style: TextStyle(color:Colors.black),),backgroundColor: Color(0xfff1f0cf),),
+      backgroundColor: Colors.white,
+      appBar: AppBar(leading: Icon(Icons.apps, color: Color(0xff4baea0),),title: Text("Anonymo", style: TextStyle(color:Color(0xff4baea0), fontFamily: "Poppins"),textAlign: TextAlign.center,),backgroundColor: Colors.white, elevation: 0.0,),
       body: Container(
         child: Stack(children: <Widget>[
           _widgetOptions.elementAt(_selectedIndex),
@@ -211,12 +281,12 @@ class _HomeWidgetState extends State<HomeWidget> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(Icons.perm_media),
-                title: Text("Messages")
+                title: Text("Messages", style: TextStyle(fontFamily: "Poppins", color: Color(0xff4baea0)),)
 
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.line_style),
-                title: Text("Send"))
+                title: Text("Send", style: TextStyle(fontFamily: "Poppins", color: Color(0xff4baea0))))
           ]),
     );
   }
