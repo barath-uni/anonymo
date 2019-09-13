@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #Fri Sep 13 22:53:43 IST 2019
+=======
+#Wed Sep 11 22:40:42 IST 2019
+>>>>>>> 34e74fc47064d9ecf045acb5f3db17fb6af2b634
 base.0=/home/baradwaj/AndroidStudioProjects/anonymo/anonymo/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex
